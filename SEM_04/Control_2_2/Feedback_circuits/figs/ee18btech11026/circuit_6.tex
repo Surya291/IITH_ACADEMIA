@@ -1,0 +1,12 @@
+\begin{circuitikz}[american]
+\usetikzlibrary{positioning, fit, calc}
+\draw (0,0)to [open,v=$V_0$]++(0,-2)to[short]++(2,0)
+(0,0)to++(2,0);
+\draw (2,-1)node[draw,minimum width=2cm,minimum height=2cm] (load) {H}(2,0)
+(2,0) -- (4,0);
+\draw (2,-2) to[short] (4,-2)
+node at (4,-1.7) {$-$}
+node at (4,-0.3){$+$}
+node at (4,-1){$V_f$}
+;
+\end{circuitikz}

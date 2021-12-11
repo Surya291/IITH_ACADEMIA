@@ -1,0 +1,242 @@
+An op amp with open-loop voltage gain of $10^{4}$ and poles at $10^{6},10^{7} $and$ 10^{8}$ Hz is to be compensated by the addition of a fourth dominant pole to operate stably with unity feedback ($|H| = 1$). What is the frequency of the required dominant pole? The compensation network placed in the negative feedback path of the op amp. The dc bias conditions are such that a $1M\Omega$ resistor can be tolerated in series with each of the negative and positive input terminals. What capacitor is required between the negative input and ground to implement the required fourth pole?
+\begin{enumerate}[label=\arabic*.,ref=\theenumi]
+%\begin{enumerate}[label=\thesection.\arabic*.,ref=\thesection.\theenumi]
+\numberwithin{equation}{enumi}
+
+\item Find $G(s)$ for the OPAMP.
+%\renewcommand{\thefigure}{\theenumi.\arabic{figure}}
+\\
+\solution
+\begin{align}
+G(s) = \frac{G_0}{\brak{1+\frac{s}{P_{1}}}\brak{1+\frac{s}{P_{2}}}\brak{1+\frac{s}{P_{3}}}}
+\end{align}
+%
+where the gain and poles are listd in Table \ref{table:ee18btech11026_Table_1}.
+%
+\begin{table}[!ht]
+\centering
+\input{./tables/ee18btech11026/ee18btech11026_1.tex}
+\caption{}
+\label{table:ee18btech11026_Table_1}
+\end{table}
+%
+%\item Examine the stability of the feedback system with open loop gain $G(s)$ and feedback $H=1$.
+%\\
+%\solution Find the poles of $T(s)$
+\item Find the 4th dominant pole $P_D$ that will stabilize the system.
+\\
+\solution Let the pole frequency be $f_D$.  The 4 pole system will be stable if 
+ the gain begins to rolloff from 80dB at a -20 dB/dec rate  from $f_{D}$ and continues  until $f_{P1}$ where it cuts 0dB line. From Fig. \ref{fig:ee18btech11026_1}, 
+\begin{align}
+f_{D} &= \frac{f_{P1}}{10^{4}}\\
+\implies f_{D} &= 10^{2} Hz
+\end{align}  
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\columnwidth]{./figs/ee18btech11026/ee18btech11026_1.eps}
+    \caption{Bode Plot using asymptotic approximations}
+    \label{fig:ee18btech11026_1}
+\end{figure}
+\item Draw the block diagram for the stabilized circuit.
+\\
+\solution See Fig. \ref{fig:ee18btech110026_block}, where 
+\begin{align}
+P_D = \frac{1}{R_fC_f}
+\end{align}
+
+\begin{figure}[!ht]
+	\begin{center}
+				\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11026/block.tex}}
+	\end{center}
+\caption{Block Diagram}
+\label{fig:ee18btech110026_block}
+\end{figure}
+%
+\item Design the OPAMP circuit for Fig. \ref{fig:ee18btech110026_block}.
+\\
+\solution See Fig. \ref{fig:ee18btech110026_circuit_1}.
+\begin{align}
+H(s) = \frac{V_{f}}{V_{0}}
+	&= \frac{1}{1+sR_{f}C_{f}}
+\end{align}
+
+%
+\begin{figure}[!ht]
+	\begin{center}
+				\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11026/circuit_1.tex}}
+	\end{center}
+\caption{}
+\label{fig:ee18btech110026_circuit_1}
+\end{figure}
+%
+%For $P_{D}$ to become a dominant pole, $f_D < f_1$.
+%Also, $f_{D}$ should be such that the modified loop gain intersects the $20log(\frac{1}{|H(s)|})$ with -20 dB slope  near $f_{P1}$ , so as to ensure stability. 
+%\\
+%Since its unity feedback , the loop gain should intersect the 0dB line at $f_{P1}$\\
+%\\As shown in Fig:\ref{fig:ee18btech11026_1}:
+%
+%This extra pole is achieved through a Low-pass series RC network placed in the negative feedback as shown in the figure \ref{fig:ee18btech110026_circuit_1}.
+
+\item Find $R_f$ and $C_f$.
+\\
+\solution
+\begin{align}
+\because P_{D} &=2\pi  f_{D},
+\\
+C_{f} &= \frac{1}{2\pi R_{f}f_{D}}
+\end{align}
+%
+Choosing
+\begin{align}
+R_{f} = R_{s}=1M\Omega,
+ C_{f} &= 1.59nF
+\end{align}
+%
+Table \ref{table:ee18btech11026_Table_2} summarizes this.
+%
+\begin{table}[!ht]
+\centering
+\input{./tables/ee18btech11026/ee18btech11026_2.tex}
+\caption{}
+\label{table:ee18btech11026_Table_2}
+\end{table}
+
+\item Verify stability using Bode plots.
+%
+The loop gain of the compensated system is
+\begin{multline}
+L(s) = G(s)H(s) 
+\\
+= \frac{10^{4}}{(1+sR_{f}C_{f})(1+\frac{s}{P_{1}})(1+\frac{s}{P_{2}})(1+\frac{s}{P_{3}})}
+\end{multline}
+The closed loop gain 
+\begin{align}
+T(s) = \frac{G(s)}{1+L(s)}
+\end{align}
+%The stability of closed loop gain can be determined through the bode plots of its loop gain L(s)\\
+%\begin{align}
+%L(j\omega)=\abs{{G(j\omega)H(j\omega)}}e^{j\phi(\omega)}
+%\end{align}
+Let 
+\begin{align}
+\phase{L(\j\omega_{180})} = -180 \degree
+\end{align}
+%$\omega_{180}$ be the frequency at which the phase of $L(j\omega)$ i.e; $\phi(w)$ = $-180^{\circ}$ and using it the stability of the system is determined as follows :
+%
+Then, for stability, 
+\begin{align}
+\abs{L\brak{\j\omega_{180}}} < 1 
+%\abs{{G(j\omega_{180})H(j\omega_{180})}} > 1 \implies Unstable 
+\end{align}
+For the uncompensated System
+\begin{align}
+L_{1}(s) = G(s)
+\end{align}
+and 
+\begin{align}
+L_{2}(s) = G(s)H(s)
+\end{align}
+for the compensated system 
+%
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\columnwidth]{./figs/ee18btech11026/ee18btech11026_2.eps}
+    \caption{Bode Plots for verificaition}
+    \label{fig:ee18btech11026_2}
+\end{figure}
+
+From Fig. \ref{fig:ee18btech11026_2},
+\begin{align}
+\abs{L_1\brak{\j\omega_{180}}} &> 1 
+\\
+\implies L_{1} &\text{is unstable}
+\end{align}
+\begin{align}
+\abs{L_2\brak{\j\omega_{180}}} & < 1 
+\\
+\implies L_{2} &\text{is stable}
+\end{align}
+%
+Thus, $H(s)$ stabilizes the unity feedback system.
+%Hence the designed Low pass network placed in negative feedback, compensates our open loop gain and stabilizes the closed loop gain of the overall system.
+\item Describe the functionality of the feedback circuit.
+\\
+\solution
+The Bode plot of $T(s)$
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\columnwidth]{./figs/ee18btech11026/Bodeplot.eps}
+    \caption{Bode Plots of T(s)}
+    \label{fig:ee18btech11026_bode}
+\end{figure}
+is avaiable in  Fig \ref{fig:ee18btech11026_bode}. This resembles a band pass filter and amplifies the frequencies lying between 0.1 MHz to 10 MHz, while rejecting higher and lower frequencies.
+%
+\item Simulate the circuit using ngspice.
+%\item \textbf{Design a circuit for the given parameters}.\\
+%\solution
+%
+%The below is a block diagram representing G(s) and H(s)
+\\
+\solution 
+The following netlist simulates the unity feedback system. 
+\begin{lstlisting}
+codes/ee18btech11026/spice/buffer_fb.net
+\end{lstlisting}
+ The step response in spice is plotted using the following code in Fig. \ref{fig:ee18btech11026_buffer}
+ \begin{lstlisting}
+codes/ee18btech11026/spice/ee18btech11026_buffer.py
+\end{lstlisting}
+
+We can observe that the step response shoots up to a very large value($10^{293}$).This was a consequence for the initial system being unstable.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\columnwidth]{./figs/ee18btech11026/ee18btech11026_spice_result_buffer.eps}
+    \caption{Step response of Uncompensated System}
+    \label{fig:ee18btech11026_buffer}
+\end{figure}
+
+The following netlist simulates the compensated system.
+   \begin{lstlisting}
+codes/ee18btech11026/spice/rc_bf.net
+\end{lstlisting}
+ The step response in spice is plotted using the following code in Fig. \ref{fig:ee18btech11026_rc_fb}
+ \begin{lstlisting}
+codes/ee18btech11026/spice/ee18btech11026_rc_fb.py
+\end{lstlisting}
+Here we can observe that the system has a transient response and it eventually  goes to 1.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\columnwidth]{./figs/ee18btech11026/ee18btech11026_spice_result_rc_bf.eps}
+    \caption{Step response of Compensated System}
+    \label{fig:ee18btech11026_rc_fb}
+\end{figure}
+
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\columnwidth]{./figs/ee18btech11026/ee18btech11026_spice_result_rc_bf_mag.eps}
+    \caption{Magnified Plot focussing on steady state}
+    \label{fig:ee18btech11026_rc_fb_mag}
+\end{figure}
+
+
+Fig. \ref{fig:ee18btech110026_circuit_2} shows how the circuit is actually implemented in spice using the parameters in Table \ref{table:ee18btech11026_Table_3}  
+
+\begin{figure}[!ht]
+	\begin{center}
+				\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11026/circuit_2.tex}}
+	\end{center}
+\caption{Circuit resembling G(s)}
+\label{fig:ee18btech110026_circuit_2}
+\end{figure}
+
+\begin{table}[!ht]
+\centering
+\input{./tables/ee18btech11026/ee18btech11026_3.tex}
+\caption{}
+\label{table:ee18btech11026_Table_3}
+\end{table}
+
+\end{enumerate}
+

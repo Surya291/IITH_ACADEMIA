@@ -1,0 +1,86 @@
+\begin{enumerate}[label=\thesection.\arabic*.,ref=\thesection.\theenumi]
+\numberwithin{equation}{enumi}
+
+\item
+Consider the state space realization : 
+\begin{align}
+    \myvec{\dot x_{1}(t) \\ \dot x_{2}(t)}=\myvec{0&0\\0&-9}\myvec{x_{1}(t)\\x_{2}(t)} + \myvec{0\\45}u(t)   
+\end{align}
+with initial conditions : 
+\begin{align}
+    \myvec{x_{1}(0)\\x_{2}(0)} = \myvec{0\\0}
+\end{align}
+, where $u(t)$ denotes unit step function.\\
+ Find the value of $\lim _ {t \rightarrow \infty}\abs{\sqrt{x_{1}^{2}(t) + x_{2}^{2}(t)}}$ 
+
+
+\item 
+\solution
+The state space model is given in the form : 
+\begin{align}
+\dot{\vec{x}}(t)&=\vec{A}\vec{x}(t)+\vec{B}\vec{u}(t) 
+\end{align}
+ X(s) can be directly determined using the below formula  : 
+\begin{align}
+     X(s)={(s\vec{I}-\vec{A})^{-1}}\vec{B} U(s)+ (s\vec{I}-\vec{A})^{-1}x(0)
+\end{align}
+Where : 
+\begin{align}
+     A =    \myvec{0&0\\0&-9}\\
+     B =    \myvec{0 \\ 45}\\
+     x(0) = \myvec{0\\0}
+\end{align}
+\begin{align}
+    \begin{split}
+         u(t) =   unit\ step\ function \\
+         \implies U(s) = \frac{1}{s}
+     \end{split}
+\end{align}
+
+\begin{align}
+\begin{split}
+     X(s) &= {\left(\myvec{s&0\\0&s}-\myvec{0&0\\0&-9} \right)^{-1}}\myvec{0\\45}\frac{1}{s}\\
+           & + \left(\myvec{s&0\\0&s}-\myvec{0&0\\0&-9} \right)^{-1}\myvec{0\\0}
+\end{split}
+\end{align}
+
+Solving X(s) : 
+\begin{align}
+     X(s) &= \myvec{s&0\\0&s+9}^{-1}\myvec{0\\45}\frac{1}{s}\\
+          &= \myvec{0\\\frac{45}{s(s+9)}}
+\end{align}
+
+
+Hence : 
+
+\begin{align}
+   X(s) = \myvec{X_{1}(s) \\ X_{2}(s) } = \myvec{0\\\frac{45}{s(s+9)}}    
+\end{align}
+By comparing elements in the matrices : 
+\begin{align}
+    X_{1}(s) = 0 \implies x_{1}(t) = 0 
+\end{align}
+Using this result we can simplify the required expression as follows :
+\begin{align}
+    \lim _ {t \rightarrow \infty}\abs{\sqrt{x_{1}^{2}(t) + x_{2}^{2}(t)}} = \abs{\lim _ {t \rightarrow \infty} x_{2}(t) }
+\end{align}
+Using the final value theorem : 
+\begin{align}
+\begin{split}
+     \abs{\lim_{t\rightarrow \infty}x_{2}(t)}  &=\abs{\lim_{s\rightarrow 0 }s X_{2}(s)}  \\
+                                         & = \abs{\lim_{s\rightarrow 0 } \left(s \frac{45}{s(s+9)}\right)} \\
+                                         & = \abs{\lim_{s\rightarrow 0 } \left( \frac{45}{s+9}\right)}\\
+                                         & =   \abs{\frac{45}{9}}\\
+                                         & = \abs{5}\\
+                                         & = 5
+                                         \end{split}
+\end{align}
+
+    Hence  $\lim _ {t \rightarrow \infty}\abs{\sqrt{x_{1}^{2}(t) + x_{2}^{2}(t)}} = 5  $
+
+\item 
+verify the answer with python code\\
+https://github.com/Surya291/EE2227-Control-systems/tree/master/Codes\\
+computeX(s).py outputs the X(s) matrix.\\
+verify.py is verification code for final value theorem\\
+\end{enumerate}

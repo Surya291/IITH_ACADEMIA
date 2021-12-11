@@ -1,0 +1,26 @@
+
+%\documentclass{standalone}
+%\usepackage{circuitikz}
+
+%\begin{document}
+\begin{circuitikz}
+\ctikzset{bipoles/length=1cm}
+  \draw
+  (-1.35, 0) node[op amp] (opamp) {}
+(2,0) node[op amp] (opamp2) {}
+(opamp.-) -- (-2.5,0.35)  to (-2.5, 0.35) node[ground]{}
+(opamp.out) to (-0.5,0) node at (-0.5,0.25){$V_1$}
+(opamp.+) -- (-2.25,-0.35) to[L =$L_1$,*-*] (-3.25,-0.35)to[R=$R_1$](-4.5,-0.35) to[V=$V_i$] (-4.5,-2.4) node[ground]{}
+(opamp.+) -- (-2.25,-0.35) to [C =$C_1$] (-2.25,-2.4) node[ground]{}
+
+
+
+
+(opamp2.-) -- (1.5,0.35) to (1,0.35) node[ground]{}
+(opamp2.+) -- (1,-0.35) to [C =$C_2$] (1,-2.4) node[ground]{}
+(opamp2.+) -- (0.75,-0.35) to [R =$R_2$] (-0.25,-0.35) --(-0.5,-0.35)--(-0.5,0) 
+(opamp2.out) to (3,0) node at (3.25,0){$V_O$}
+(opamp.center) node[]{$10^{2}$}
+(opamp2.center) node[]{$10^{2}$}
+;\end{circuitikz}
+%\end{document}

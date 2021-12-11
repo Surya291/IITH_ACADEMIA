@@ -1,0 +1,15 @@
+\begin{circuitikz}
+\ctikzset{bipoles/length=1cm}
+
+\draw 
+(0, 0) node[op amp] (opamp) {}
+(opamp.-) -- (-2.5,0.35) to[C,l_=$C_{f}$,*-*] (-3.5, 0.35) to (-4, 0.35) to (-4.5, 0.35) node[ground]{}
+(opamp.-) --(-0.85,1) to[R=$R_{f}$] (1,1) -- (1,0) --(2,0) node at(2.3,0){$V_0$}
+(opamp.out) to (1,0)%--(1.5,-0.5)% to[R=$R_L$] (1.5,-1.5) to (1.5,-1.5) node[ground]{}
+(opamp.+) -- (-0.6,-0.35) to[R =$R_s$,*-*] (-2.6,-0.35) to[V=$V_s$] (-2.6,-2.4) node[ground]{}
+node at(-3.5,0.1){$-$}
+node at(-2.5,0.1){$+$}
+node at(-3,-0.3){$V_f$}
+node at (-0.1,0){$G(s)$}
+;\end{circuitikz}
+
