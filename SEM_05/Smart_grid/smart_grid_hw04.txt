@@ -1,0 +1,52 @@
+Question:01				IoT and Smart Grid
+
+
+Thoughts : 
+
+IoT is the next step towards a global connection to any communication and computation device . While the idea Smart Grid also is close to IoT , The smart grid can highly  benefit from the IoT vision . Here the smart devices will be deployed along side the energy path , from the generation plant to the end consumer. 
+
+
+Since IoT is also picking up pace , millions of devices/appliances will be connected to the network as well as smart phones to control them. We all know that a lot of smart phones are not utilized to their full computational potential.  Since these devices will also be a part of the huge network , we can have a decentralised network (unlike the conventional client- server protocol) . We can use mobile phones to build a peer- to peer communication network (like bit-Torrent) , where each phone acts as a mini server and shares bits of information, and as a whole(the swarm of mobile phones) unitedly does the job of a typical high end server. 
+
+Uses :  This could reduce latency costs, and cuts down the cost of Server maintainence and thus also brings down the monopoly of high-tech companies making the whole network democratic as there is no hosting company .This system offers fault tollerance and also resists eaves-dropping attacks.
+
+Resource: 
+https://www.cse.wustl.edu/~jain/cse570-19/ftp/decentrl/index.html#sec2
+
+Question :  Since the smart grid and IoT technology are now rising, is this type of networking feasible, or is it implemented any where to an extent ?  
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+
+Question:01	Decentralisation of Power Distribution and management in a Smart Grid network
+
+Thoughts : 
+
+What if we include few Micro Grid(4 to 5) into a subgrid(group of microgrids) such that the surplus net production of that group meets the net consumption by all the consumers. The main idea is to ensure power balance in that region before giving it to the main grid. This will help us meet the energy needs at a local scale first and also enables local governance of power consumption and production. 
+
+Explanation : 
+Lets consider a hierarchial network (a tree based network ):
+Lets consider it has 4 tiers (levels) of controlling systems where groups of MGs are at the bottom making them the base of the network , we can now combine a few of them and make a group(a sub-grid) this will be maintained by a local body(local processing unit) , so that power balance is attained. 
+
+Case 1 :  If it is attained the surplus power is given to the next higher level.
+Case 2 : If not a messagge is sent to the top level asking for extra energy  (which might be a part of the surplus energy by another group or is produced by the main grid). 
+
+In this way we need not have a central system to maintain everything , rather we've divided them to communicate between the subgrids. 
+
+Uses: This will help us in quick desicion making since all the processing is done at the local level. 
+2.Reduces traffic load and end-to-end delay reduction. 
+3. We can easily scale up smart grids.
+
+Questions :How can this be practically implemented. Is this feasible at this moment? Are the government laws open for such a system ? 
+
+Resource : https://ieeexplore.ieee.org/document/6395792
+
+ 		
+
+
+
+
+ 
+
+

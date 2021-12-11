@@ -1,0 +1,22 @@
+*Question 5c
+
+.include "TSMC180.lib"
+.model nch_tt nmos
+
+*circuit model
+Vgs G 0 PULSE(0 1 0 0 0 2u 4u)
+M1  D G 0 0 nch_tt W=0.54u L=0.18u
+R1  suppv D 75k
+Vdd suppv 0 2.5
+CL  D     0 3p
+
+.tran 10n 4u
+.control
+run 
+plot V(G) 
+plot V(D)
+.endc
+.end
+
+
+

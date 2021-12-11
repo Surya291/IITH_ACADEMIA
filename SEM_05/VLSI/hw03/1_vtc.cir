@@ -1,0 +1,36 @@
+***  1st question.. 
+***  finding Vtc char with beta = 6.6 gives Vm = Vdd/2
+
+.include TSMC180.lib
+
+.model pch_tt pmos
+.model nch_tt nmos
+
+*Vin inp 0 PULSE( 1.8 0 1n  1n  1n 1m 2m )
+Vin  inp 0 dc
+
+.param beta = 6.6
+.param Wn = 0.18u
+.param Wp = beta*Wn
+
+Vsrc  Vdd	0  dc  1.8
+MN out inp 0 	0 	nch_tt 	W = Wn	L = 0.18u 
+MP out inp Vdd 	Vdd	pch_tt	W = Wp	L = 0.18u
+*C out 0  10n
+
+
+
+.control
+dc Vin 0 1.8 .01
+
+*plot V(out) vs v(inp)
+plot deriv(V(out))
+*tran 1u 10m 
+
+.endc
+.end
+
+
+
+
+

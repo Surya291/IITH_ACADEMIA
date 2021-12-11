@@ -1,0 +1,54 @@
+.include TSMC180.lib
+.model nch_tt nmos
+
+M vout input 0 0 nch_tt W = 0.54u L = 0.18u
+R vout vdd 75k
+
+** input Vmax 1V, 50 per duty cycle , freq : 25kHz
+Vin input 0  PULSE(0 2.5 0 0 0 2u 4u) 
+V Vdd 0 2.5V
+C vout 0 3p
+
+
+.tran 0.01u 10u 6u
+.control
+run
+plot V(input)
+plot V(vout)
+
+meas tran vout(max) MAX V(vout)
+meas tran input(max) MAX V(input)
+
+let v_half = vout(max)/2
+let v_10 = 0.1*vout(max)
+let v_90 = 0.9*vout(max)
+let vin_half = 1.25
+meas tran tr_10 when V(vout) = v_10 cross = 1
+meas tran tr_90 when V(vout) = v_90 cross = 1
+
+meas tran tf_90 when V(vout) = v_90 cross = 2
+meas tran tf_10 when V(vout) = v_10 cross = 2
+meas tran tr_half_1 when V(vout) = v_half cross = 1
+meas tran tr_half_2 when V(vout) = v_half cross = 2
+
+
+meas tran tin_half1 when V(input) = vin_half cross = 1
+meas tran tin_half2 when V(input) = vin_half cross = 2
+
+let tpl = tr_half_1  - tin_half1
+let tph = tr_half_2 - tin_half2
+let tp  =(tpl+tph)/2
+
+
+let tr = tr_90 - tr_10
+let tf = tf_10 - tf_90
+
+print tr tf
+print tpl tph
+print tp
+
+wrdata 5.c.1.dat V(input) 
+wrdata 5.c.2.dat V(vout)
+.endc
+.end
+

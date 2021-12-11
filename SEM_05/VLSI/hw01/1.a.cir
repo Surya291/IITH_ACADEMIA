@@ -1,0 +1,28 @@
+*1.a question
+
+*netlist
+
+*vin	a	0	2.5
+vin	a	0	dc 0 PULSE (0 2.5 1u 1u 1 1)
+
+R	a	vout	1k
+C	vout	b	1u
+Rs	b	0	100
+
+
+
+.control
+op
+
+print all
+
+tran 10u 5m
+plot v(vout) 
+plot v(a)
+
+wrdata 1.a.dat v(a) v(vout) 
+*plot v(b)
+*plot v(vout) - v(a)
+.endc
+
+.end

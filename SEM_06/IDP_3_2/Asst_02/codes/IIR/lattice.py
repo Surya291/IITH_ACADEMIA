@@ -1,0 +1,3 @@
+
+def lattice(c,v):
+	

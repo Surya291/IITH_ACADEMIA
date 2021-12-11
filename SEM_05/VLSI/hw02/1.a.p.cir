@@ -1,0 +1,28 @@
+*** For Ques: 1. PMOS
+*** Vgs = -1.8V, init Vds = -1.8V.,  
+** M1 --> 1. W/L = 240/180
+** M2 --> 2. W/L = 400/180
+
+.include TSMC180.lib
+.model pch_tt pmos (level = 8)
+
+Vgs	g	0	-1.8 
+V_am	d	am	0   	** ammeter     
+C	am	0	1e-12  	IC = -1.8V
+*M1	d	g	0	0  pch_tt   W=240n  L = 180n
+M2	d	g	0	0  pch_tt   W=400n  L = 180n
+
+.ic V(am) = -1.8V
+
+.control
+
+tran .5p  30n 
+*plot -V(am)
+*plot -i(V_am) vs V(am)  title "I vs V"
+plot V(am)/-i(V_am) vs V(am) title " Res vs V: M1 " 
+wrdata 1.a.p.2.dat V(am)  V(am)/-i(V_am)
+
+.endc
+.end
+
+

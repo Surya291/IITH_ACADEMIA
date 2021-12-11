@@ -1,0 +1,19 @@
+Pytorch tutorials:
+
+GPU in Pytorch : 
+https://medium.com/ai%C2%B3-theory-practice-business/use-gpu-in-your-pytorch-code-676a67faed09
+
+Dataset & Dataloaders : 
+
+Dataloaders for creating automatic batch sizes. This requires dataset_creating class to have 2 imp methods : get_item, len
+
+ https://medium.com/noumena/how-does-dataloader-work-in-pytorch-8c363a8ee6c1
+
+Workers in dataloader
+
+https://deeplizard.com/learn/video/kWVgvsejXsE
+
+
+What is momentum and how is it useful to get rid of saddle points;
+
+https://towardsdatascience.com/gradient-descent-with-momentum-59420f626c8f

@@ -1,0 +1,29 @@
+*1.b question
+
+*netlist
+
+
+vin	a	0	dc 0 SIN(0 1 100 0 0 0 )
+*vin	a	0	dc 0 SIN(0 1 1MEG 0 0 0 )
+
+
+R	a	vout	1k
+C	vout	b	1u
+Rs	b	0	100
+
+
+
+.control
+op
+
+*print v(a) v(vout) v(b)
+
+tran 10u 20m
+*tran 10n 2u
+
+plot v(vout) title "Vout" v(a)
+wrdata 1.b.dat v(a) v(vout)
+
+.endc
+
+.end

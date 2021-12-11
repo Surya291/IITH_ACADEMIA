@@ -1,0 +1,43 @@
+*** For Ques: 2 NMOS
+*** Vgs = Vcm + sin(wt),  Vds = 0V.,  sweeping vcm
+
+** M1 --> 1. long channel
+** M2 --> 2. short channel
+
+
+.include TSMC180.lib
+.model nch_tt nmos (level = 8)
+.param f= 10e6
+*.param f = 10e9
+Vgs	g	a	dc 0  SIN(0 {1/(2*3.14*f)} f 0 0 0 )
+Vcm	a	0	-2V
+Ml	0	g	0	0	nch_tt   W=25u  L = 10u  
+*Ms	0	g	0	0	nch_tt	 W = 450n L=180n 
+
+.control
+let v = -2
+let v_vec = vector(20)
+let c_vec = vector(20)
+let loop = 0
+while v <1.8  
+	alter @Vcm v
+
+ 	tran 1n 1u 
+	*tran .1p 10n
+
+	meas tran i_max FIND i(Vcm) AT = 1u
+	*meas tran i_max FIND i(Vcm) AT = 10n
+
+        print v
+	plot i(Vcm)         xlabel "Current at Vcm =  $&v"
+
+	let v_vec[loop] = v
+	let c_vec[loop] = -i_max
+	let v = v + 0.2
+	let loop  = loop + 1
+	
+end
+plot c_vec vs v_vec
+wrdata 2.dat c_vec v_vec
+.endc
+.end

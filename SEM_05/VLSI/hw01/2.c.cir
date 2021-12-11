@@ -1,0 +1,20 @@
+
+*netlist
+.Model Diode D (is = 1e-14)
+
+Vin	a	0	2.5
+R1	a	b	2k
+D1	b	c	Diode
+R2	c	d	2k
+D2	d	0	Diode
+
+
+
+
+.control
+op
+print all
+.endc
+
+.end
+

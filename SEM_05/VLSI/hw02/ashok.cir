@@ -1,0 +1,35 @@
+
+
+.include TSMC180.lib
+.model nch_tt pmos
+**********************************
+V1 gs 0 DC 1.8	
+M1 ds gs 0 0 nch_tt W=0.24u L=0.18u
+C c1 0 1pF ic= 1.8V
+V2 c1 ds DC 0
+*.IC V(C1)=1.8
+.control
+let vdd = -1.8V
+let Req = vector(17)
+let Vval = vector(17)
+let loop = 0
+print Req[0]
+while loop<17
+	alter @V1=vdd
+	alter @C ic=vdd
+	let vdd2 = vdd/2
+	run
+	tran 0.05u 500u uic
+	let t_vdd = 0
+	let v3 = v(ds)/i(v2)
+	meas tran t_vdd2 when v(ds)=vdd2 cross=1
+	meas tran r_eq avg v3 from=t_vdd to=t_vdd2
+	let Req[loop] = r_eq
+	let Vval[loop] = vdd
+	let loop=loop+1
+	let vdd=vdd+0.1
+end
+plot req vs vval
+wrdata plot_2.dat req vs vval
+.endc
+.end

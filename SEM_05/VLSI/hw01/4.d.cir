@@ -1,0 +1,31 @@
+* netlist
+
+.include TSMC180.lib
+
+
+.model nch_tt nmos (level = 8)
+
+Vgs	g	0	2
+Vds	d	a	1.8
+
+V_am	a	0	0
+
+Ms	d	g	0	0	nch_tt	W=0.27u L=0.18u
+*Ml	d	g	0	0	nch_tt	W=15u L = 10u
+
+.control
+
+
+dc    Vgs 0 2 0.001
+
+plot -i(V_am) title "short channel"  ylog
+
+wrdata 4.d.2.dat -i(V_am)
+.endc
+
+.end	
+
+
+
+	
+

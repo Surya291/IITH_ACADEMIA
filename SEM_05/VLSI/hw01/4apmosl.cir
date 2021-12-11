@@ -1,0 +1,22 @@
+*IV charecteristics of PMOS device long channel
+
+.include "TSMC180.lib"
+.model pch_tt pmos
+
+*circuit model
+Vgs G 0 DC -2.5
+M1  D G 0 0 pch_tt W=15u L=10u
+Vtest n2 D DC 0
+Vdd   n2 0 DC 0
+
+*simulation using dc sweep and plotting the result IV characteristics
+.dc Vdd -1.8 0 0.036
+.control
+run 
+plot Vtest#branch vs V(D)
+*wrdata 4apmos_lc_vg2point5.dat Vtest#branch V(D)
+.endc
+.end
+
+
+

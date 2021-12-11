@@ -1,0 +1,25 @@
+* netlist
+
+
+***** for PMOS
+.include TSMC180.lib
+
+.model pch_tt pmos (level = 8)
+
+Vgs	g	0	dc -2.5
+Vds	d	a	0
+V_am	a	0	0
+
+*Ms	d	g	0	0	pch_tt	W=0.27u L=0.18u
+Ml	d	g	0	0	pch_tt	W=15u L = 10u
+
+.control
+
+dc Vds -1.8 0  0.005  Vgs -2 -1 0.5    
+run
+plot -i(Vds) title  "Short Channel"
+
+wrdata 4.1.c.dat -i(V_am)
+.endc
+
+.end	

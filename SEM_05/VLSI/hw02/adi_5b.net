@@ -1,0 +1,33 @@
+
+.include "TSMC180.lib"
+.model nch_tt nmos
+
+*circuit model
+Vgs G 0 DC 0
+M1  D G 0 0 nch_tt W=0.54u L=0.18u
+R1  suppv D 100k
+Vdd suppv 0 2.5
+
+
+
+.control
+run 
+let r1 = 100k
+while r1 > 1k
+alter @R1 r1
+
+dc Vgs 0 2.5 0.01
+print r1
+print minimum(deriv(V(D)))
+meas tran vm FIND V(D) WHEN V(D) = V(G)
+plot V(D) vs V(G)	  xlabel "At R = $&r1"
+plot deriv(V(D)) vs V(G)  xlabel "At R = $&r1"
+let r1 = r1 - 10k
+end
+
+
+.endc
+.end
+
+
+

@@ -1,0 +1,26 @@
+.include TSMC180.lib
+.model nch_tt nmos
+V1 N002 0 SINE(0 1.59e-11 10e9)
+*M1 0 N001 0 0 nch_tt W=25u L=10u
+M1 0 N001 0 0 nch_tt W=0.45u L=0.18u 
+V2 N001 N002 DC -1.8
+.control
+let Vg = -1.8
+let x = unitvec(72)
+let y = unitvec(72)
+while Vg < 1.81
+	alter V2=Vg
+	*tran 1u 1m
+	*tran 1n 100n
+	tran 10p 1n
+	run
+	*meas tran i_max FIND i(v1) at=50n
+	meas tran i_max MAX i(v1) from=0 to=1n
+	let x[20*(Vg+1.8)] = Vg
+	let y[20*(Vg+1.8)] = i_max
+	let Vg = Vg + 0.05
+end
+plot y vs x
+wrdata plot_8.dat y vs x
+.endc
+.end

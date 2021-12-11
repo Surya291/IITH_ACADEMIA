@@ -1,0 +1,22 @@
+parameter sweep
+* resistive divider, R1 swept from start_r to stop_r
+VDD 1 0 DC 1
+R1 1 2 1k
+R2 2 0 1k
+.control
+let start_r = 1k
+let stop_r = 10k
+let delta_r = 1k
+let r_act = start_r
+* loop
+while r_act le stop_r
+alter r1 r_act
+op
+
+let haha = v(2)
+print haha + haha
+plot v(2)
+let r_act = r_act + delta_r
+end
+.endc
+.end

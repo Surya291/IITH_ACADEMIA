@@ -1,0 +1,139 @@
+***  1st question.. b part
+***  Observing tplh and tphl wrt beta....
+
+.include TSMC180.lib
+
+.model pch_tt pmos
+.model nch_tt nmos
+
+*** below for NO-LOAD
+Vin inp 0 PULSE( 1.8 0 0  0  0 250p 500p )
+*** below for C-load
+*Vin inp 0 PULSE( 1.8 0 0  0  0 1u 2u )
+C out 0  0p
+
+
+
+.param beta = 1
+
+
+
+Vsrc  Vdd	0  dc  1.8
+MN out inp 0 	0 	nch_tt 	W =0.18u	L = 0.18u 
+MP out inp Vdd 	Vdd	pch_tt	W = beta*0.18u	L = 0.18u
+
+
+*** While loop to loop over diff values of s and find the prop delay..
+
+
+.control
+
+let vec_len= 20
+let tlhs = vector(vec_len)
+let thls = vector(vec_len)
+let tps = vector (vec_len)
+
+let Wp_val = vector(vec_len)
+let Wn_val = vector(vec_len)
+
+let loop = 1
+
+while loop < 21
+
+	*************************** FOR INCREASING WP --> INCRESEING BETA :  from 0.18u to 5* 0.18u
+	let beta = 1 + (loop)*(4/vec_len)
+	alter @MN W=0.18u
+	alter @MP W= beta*0.18u
+
+
+	
+	*** Uncomment for noload
+	tran 1p 2n
+	*** Uncomment for load
+	*tran 1n 5u
+	run
+
+	meas tran O_max max out
+	meas tran I_max max inp
+
+	let I_half = 0.5*I_max
+	let O_half = 0.5*O_max
+
+
+	meas tran tplh	trig V(inp) VAL = I_half CROSS=1 targ V(out) VAL=O_half CROSS=1 
+	meas tran tphl  trig V(inp) VAL = I_half CROSS=2 targ V(out) VAL=O_half CROSS=2 
+
+	let tp = (tplh + tphl) * 0.5
+	
+	let tlhs[loop-1] = tplh
+	let thls[loop-1] = tphl
+	let tps[loop-1] = tp
+	let Wp_val[loop-1] = beta*0.18u
+	let Wn_val[loop - 1] = 0.18u
+
+	let loop = loop+1
+end
+plot thls vs Wp_val  tlhs vs Wp_val tps vs Wp_val title "Wp"  xlabel 'Wp values'
+wrdata 1.b._wp.dat thls vs Wp_val  tlhs vs Wp_val tps vs Wp_val
+
+****************************************************************************************************
+****************************************************************************************************
+****************************************************************************************************
+****************************************************************************************************
+
+
+
+let loop = 1
+
+while loop < 21
+
+	*************************** FOR INCREASING WN --> Decreasing BETA :  from 0.18u to 5* 0.18u, with Wp = 5*0.18u
+	let beta = 1 + (loop)*(4/vec_len)
+	alter @MN W= beta*0.18u
+	alter @MP W= 5*0.18u
+
+
+	*** Uncomment for noload
+	tran 1p 2n
+	*** Uncomment for load
+	*tran 1n 5u
+	run
+
+	meas tran O_max max out
+	meas tran I_max max inp
+
+	let I_half = 0.5*I_max
+	let O_half = 0.5*O_max
+
+
+	meas tran tplh	trig V(inp) VAL = I_half CROSS=1 targ V(out) VAL=O_half CROSS=1 
+	meas tran tphl  trig V(inp) VAL = I_half CROSS=2 targ V(out) VAL=O_half CROSS=2 
+
+	let tp = (tplh + tphl) * 0.5
+	
+	let tlhs[loop-1] = tplh
+	let thls[loop-1] = tphl
+	let tps[loop-1] = tp
+
+	*** Actual Wn_val facing issues with nae
+	let Wp_val[loop-1] = beta*0.18u
+
+
+	let loop = loop+1
+end
+plot thls vs Wp_val  tlhs vs Wp_val  tps vs Wp_val title "Wn"  xlabel 'Wn values' 
+wrdata 1.b.wn.dat thls vs Wp_val  tlhs vs Wp_val  tps vs Wp_val
+
+
+.endc
+.end
+
+
+
+
+
+
+
+
+
+

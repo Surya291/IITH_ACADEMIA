@@ -1,0 +1,39 @@
+ngspice :
+
+Cmds : 
+
+*  refers to comments
+for transient simulations
+
+1. for DC : we need to add a pulse
+
+V1 in 0 dc 0 PULSE (0 5 1u 1u 1u 1 1)
+
+
+For a pulse we have to add PULSE(VL VH TD TR TF PW PER PHASE) to the DC voltage of our voltage source, where VL is the starting, VH the end voltage, TD a delay, TR and TF are rise and fall times, PW is the pulse width, PER the period of repetition, PHASE a phase shift.
+
+
+We have a pulse from 0 to 5 V, the delay before the pulse starts, its rise and fall times are all 1 us. Pulse width and pulse period are 1 s each, far beyond our intended simulation time. Phase does not matter here, we omit it. So here we apply just the rising edge of the pulse. 
+
+
+for simulation : 
+tran 50u 50 m
+
+step value 50u sec, for a duration of 50m sec
+
+
+2. For AC : 
+
+
+3. For Cap:
+Capacitors
+General form:
+CXXXXXXX n+ n- <value> <mname> <m=val> <scale=val> <temp=val>
++ <dtemp=val> <tc1=val> <tc2=val> <ic=init_condition>
+Examples:
+CBYP 13 0 1UF
+COSC 17 23 10U IC=3V
+
+
+The init conditions work only if uic is specified in tran condition.
+

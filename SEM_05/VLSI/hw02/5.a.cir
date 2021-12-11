@@ -1,0 +1,39 @@
+** Q5. VTC of NMOS  with res
+
+.include TSMC180.lib
+.model nch_tt nmos
+
+
+M vout input 0 0 nch_tt W = 0.54u L = 0.18u
+R vout vdd 75k
+Vin input 0 dc 
+V Vdd 0 2.5V
+
+.control
+dc Vin 0 3 .01
+
+plot V(vout) vs v(input)
+plot deriv(V(vout))
+
+let diff=deriv(V(vout))
+let peakgain=deriv(diff)
+meas dc vIL find V(input) when diff=-1 cross=1
+meas dc vIH find V(input) when diff=-1 cross=2
+meas dc vOH find V(vout) when V(input)=0 cross=1
+meas dc vOL find V(vout) when V(input)=2.5 cross=1
+meas dc vM find V(vout) when V(input)=V(vout) cross=1
+meas dc gain_peak find diff when peakgain=0
+
+wrdata 5.a.1.dat V(vout)  vs v(input)
+wrdata 5.a.2.dat deriv(V(vout)) vs v(input)
+
+.endc
+.end
+
+
+
+
+
+
+
+

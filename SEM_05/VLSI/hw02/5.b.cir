@@ -1,0 +1,31 @@
+.include TSMC180.lib
+.model nch_tt nmos
+
+M vout input 0 0 nch_tt W=0.54u L=0.18u
+R vout vdd 75k
+Vin input 0 dc
+V vdd 0 2.5V
+.control
+
+let r_temp = 50k
+while r_temp < 200k
+	dc Vin 0V 3V 0.01V 
+	alter @R = r_temp
+
+	plot V(vout)
+	plot deriv(V(vout))
+	let diff=deriv(V(vout))
+	let peakgain=deriv(diff)
+	meas dc vil find V(input) when diff=-1 cross=1
+	meas dc vih find V(input) when diff=-1 cross=2
+	meas dc voh find V(vout) when V(input)=0 cross=1
+	meas dc vol find V(vout) when V(input)=2.5 cross=1
+	meas dc vm find V(vout) when V(input)=V(vout) cross=1
+	meas dc gain_peak find diff when peakgain=0
+	let r_temp = r_temp + 70k
+end
+
+*wrdata 5.b.1.dat V(vout)  vs v(input)
+*wrdata 5.b.2.dat deriv(V(vout)) vs v(input)
+.endc
+.end

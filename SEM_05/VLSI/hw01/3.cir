@@ -1,0 +1,26 @@
+
+* 3 q
+* netlist
+
+*GXXXXXXX N+ N- NC+ NC- VALUE <m=val>
+* N+,N- are current flow nodes , curr flows from + to -ve
+* nc+, nc- are the control nodes
+
+vin	0	a	dc 0 SIN(0 0.5 1k 0 0 0 )
+Rin	a	b	1k
+Rf	b	vout	3k
+R	vout	0	1
+G1	vout	0	b	0	1e6
+
+.control
+op
+tran 10u 5m
+plot -v(a) v(vout)
+wrdata 3.dat -v(a) v(vout)
+
+.endc
+.end
+
+
+
+

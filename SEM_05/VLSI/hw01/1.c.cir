@@ -1,0 +1,29 @@
+*1.c question
+
+*netlist
+
+
+*vin	a	0	dc 0 SIN(0 1 100 0 0 0 )
+*vin	a	0	dc 0 SIN(0 1 1MEG 0 0 0 )
+vin	a	0	dc 0 ac 1 PULSE (0 1 1u 1u 1u 1 1)
+
+* 1 in ac helps in getting the ratio of gain
+
+R	a	vout	1k
+C	vout	b	1u
+Rs	b	0	100
+
+
+
+.control
+op
+ac dec 1000 10 10MEG
+
+settype decibel vout
+plot vdb(vout) xlimit 10 10MEG ylabel 'small signal gain'
+wrdata mag.dat vdb(vout)
+set units=degrees 
+plot PHASE(vout) ylabel 'phase'
+wrdata phase.dat PHASE(vout)
+.endc
+.end

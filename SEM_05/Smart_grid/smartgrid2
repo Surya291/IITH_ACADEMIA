@@ -1,0 +1,28 @@
+Energy consumption is based on the total amount of electricity used by the shopping mall, however the demand charges are based on the highest rate of electrical use. Many retail businesses don’t realize that demand charges can make up to 70% of the utility bill.This peak demand for electricity can be traced to modern heating and cooling needs, with air conditioning making up 40% of a building’s peak electricity needs.
+Due to demand for air-conditioning,lights etc..electricity tends to be most expensive during the day when the demand on energy is the highest and the electric grid is closest to its maximum capacity. Because shopping centers are open during peak energy hours, finding relief from high electricity costs can be tricky. 
+Let's assume a shopping mall("a") having a monthly current bill of "y" Rupees (mostly on average 2,56,410 kWh per month~20,00,000 INR (Tarif~7.8per unit and area of mall is on average 2,00,000 sqf for a multiplex)) without any smart grid technology. I would give the following suggestions.Lets assume the mall is open for 14 hrs a day.
+Suggestion-1:-  Increase Awareness of Energy Consumption Through Sub-metering and using automated sensors:-
+Sub-meters help you keep close tabs on the amount of energy the shopping mall is using which can promote the conscientious use of energy, and using automation sensors like motion sensors, LDR sensors(light dependent photo resistor) can promote less wastage of energy.Use of motion sensors in areas like clock rooms helps ensure that lights are off whenever a person leaves the area.Ldr sensor senses the surrounding sunlight light and respond accordingly. Ldr sensor allows the light to be "on" only in dark and savings of up to 15%. Average approximate values taken.
+P(AC) = 275 kW/hr(summer)
+P(lights and fans) = 153 kW/hr
+P(other appliances like lifts) = 182.5 kW/hr.
+P(total) = 275 kW/hr + 153 kW/hr + 182.5 kW/hr. = 610.5kW/hr
+E(per month) = 610.5kW/hr x(14x30) ~ 2,56,410 kWh (per month)
+E(original) = 2,56,410 kWh  = 2,56,410 units.
+y = Electricity Cost(original) = E(original) = 2,56,410x7.8 ~ 20,00,000 INR
+1unit = 1kWh
+E(sub-metering) = (2,56,410-(15* 2,56,410)/100)= 2,56,410 - 38,462 = 217,948 kWh
+Electricity Cost(sub-metering) = 217,948 units = 217,948 x 7.8 ~ 17,00,000 INR.
+Cost reduction(z) = 20,00,000 -17,00,000 INR.= 3,00,000 INR.
+%reduction in electricity cost = (3,00,000/20,00,000)x100 ~ 15%.
+->Using the above technology, will cost 17,00,000 INR. and saves 3,00,000 INR.
+
+Suggestion-2:- Solar PV system can be used for lighting provisions. This is especially useful in security lighting and electric fencing. As well, parking roofing can be constructed using solar panels. A feasibility study should be carried out before solar PV system project is initiated. Rooftop solar power and advanced green building features like geo - thermal cooling can meet 15-20% of a Shopping Mall’s electricity requirements in India. If your shopping mall consumes a lot of diesel for power generation, rooftop solar can abate up to 10% of your diesel bills, subject to timing of load shedding 100 SF of shade-free rooftop space can provide 4 kWh of solar power per day, on average. 
+E(per month) = 610.5kW/hr x(14x30) ~ 2,56,410 kWh (per month)
+y = Electricity Cost(original) = E(original) = 2,56,410x7.8 ~ 20,00,000 INR
+1unit = 1kWh
+E(sub-metering) = (2,56,410-(10* 2,56,410)/100)= 2,56,410 - 25,641 = 230,769 kWh
+Electricity Cost(sub-metering) = 230,769 units = 230,769 x 7.8 ~ 18,00,000 INR.
+Cost reduction(z) = 20,00,000 -18,00,000 INR.= 2,00,000 INR.
+%reduction in electricity cost = (2,00,000/20,00,000)x100 ~ 10%.
+->Using the above technology, will cost 18,00,000 INR. and saves 2,00,000 INR.

@@ -1,0 +1,29 @@
+
+
+.include "TSMC180.lib"
+.model nch_tt nmos
+
+
+
+Vgs1 n1 0 DC 2
+Vgs2 T n1  DC 0 AC 1 SINE(0 0.003183 50)
+M1  0 G 0 0 nch_tt W=25u L=10u
+Vtest T G DC 0
+
+.control
+let vgs1 = 2
+while vgs1 >= -2
+	alter @Vgs1 vgs1
+ 	tran 10u 100m 
+	meas tran c1 FIND i(Vtest) AT = 100m
+        print vgs1
+	plot i(Vtest)         xlabel "Current waveform at VCM $&vgs1"
+	let vgs1 = vgs1 - 0.25
+	
+	
+end
+.endc
+.end
+
+
+

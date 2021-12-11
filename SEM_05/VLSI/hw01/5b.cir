@@ -1,0 +1,13 @@
+
+*Q5.b
+*netlist
+VS	Vin	0	AC	1	PWL(0 0V 10p 1V 1 1V)
+R1	Vin	Vout	1k
+C1	Vout	0	1p
+
+.control
+
+tran 0.1p 10n
+plot V(Vout) 
+.endc
+.end

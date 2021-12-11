@@ -1,0 +1,23 @@
+* netlist
+
+.param tr = 1p
+
+vin	a	0	dc 0 PULSE (0 1 tr 1p 1 1)
+R	a	vout	1k
+C	vout	0	1pf
+
+
+.control
+op
+
+
+
+tran 0.5p 4n
+plot v(a) 
+plot v(vout)
+
+
+*wrdata vout.dat v(a) v(vout)
+
+.endc
+.end	
